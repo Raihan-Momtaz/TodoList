@@ -1,0 +1,27 @@
+.container{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+
+}
+
+.centered-table table{
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.centered-table th{
+    background-color: #36304a;
+    color: aliceblue;
+    padding: 15px;
+}
+
+.mat-mdc-row:nth-child(odd){
+    background-color:#0000000d;
+    border-bottom: none !important;
+}
+
+.mat-mdc-cell{
+    border-bottom: none !important;
+}

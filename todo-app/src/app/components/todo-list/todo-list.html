@@ -1,14 +1,39 @@
-<div class="todo-container">
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: wheat;
+">
   <h2>TODO List</h2>
+</div>
   <div class="add-form">
     <input [(ngModel)]="newTitle" placeholder="New todo" />
     <button (click)="addTodo()">Add</button>
   </div>
-  <ul>
-<li *ngFor="let todo of todos">
-  {{ todo.taskTitle }}
-  <button (click)="deleteTodo(todo.taskId)">Delete</button>
-</li>
 
-  </ul>
+<div class="container">
+
+    <div class="centered-table">
+        <table mat-table [dataSource]="todos" class="mat-elevation-z8" style="margin-top: 20px;">
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="taskTitle">
+            <th mat-header-cell *matHeaderCellDef style="width: 200px"> Tasks </th>
+            <td mat-cell *matCellDef="let todo" style="width: 200px"> {{ todo.taskTitle }} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef > Action </th>
+            <td mat-cell *matCellDef="let todo" style="width: 50px">
+            <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
 </div>
+
+
