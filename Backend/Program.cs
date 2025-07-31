@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
+builder.Services.AddSingleton<TodoApi.Services.TodoService>();
 
 var app = builder.Build();
 
