@@ -1,0 +1,14 @@
+<div class="todo-container">
+  <h2>TODO List</h2>
+  <div class="add-form">
+    <input [(ngModel)]="newTitle" placeholder="New todo" />
+    <button (click)="addTodo()">Add</button>
+  </div>
+  <ul>
+<li *ngFor="let todo of todos">
+  {{ todo.taskTitle }}
+  <button (click)="deleteTodo(todo.taskId)">Delete</button>
+</li>
+
+  </ul>
+</div>
