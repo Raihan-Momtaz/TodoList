@@ -58,6 +58,9 @@ now try npm install )
 Install  **Angular Material**  
   ng add @angular/material  
 
+Install  **Moment** for Date&Timepicker  
+  npm install @angular/material-moment-adapter moment  
+
 **Start the Angular App**  
   ng serve  
 
