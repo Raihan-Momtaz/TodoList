@@ -19,7 +19,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 export class TodoList {
   todos: TodoItem[] = [];
   newTitle = '';
-   displayedColumns: string[] = ['taskTitle', 'action']; 
+   displayedColumns: string[] = ['taskTitle', 'createdAt', 'action'];
+
 
   constructor(private todoService: TodoService,
     private dialog: MatDialog 
@@ -28,9 +29,17 @@ export class TodoList {
   }
 
   //function to list all items in a list
-  loadTodos() {
-    this.todoService.getTodos().subscribe(data => (this.todos = data));
-  }
+loadTodos() {
+  this.todoService.getTodos().subscribe(data => {
+    // Sort ascending: oldest first
+    data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
+    console.log('Todos loaded and sorted (ascending):', data);
+    this.todos = data;
+  });
+}
+
+
 
    //function to delete an item in a list
   deleteTodo(id: number) {
@@ -48,7 +57,7 @@ onAdd() {
       createdAt: result.dateTime,
       isTaskCompleted: false
     };
-    console.log('Adding new todo:', newTodo);
+ 
     this.todoService.addTodo(newTodo).subscribe(() => {
       this.loadTodos();
     });

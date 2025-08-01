@@ -19,11 +19,15 @@ namespace TodoApi.Services
             todoItems.FirstOrDefault(task => task.TaskId == taskId);
 
         // Adds new task
-        public TodoItem AddTask(TodoItem newTask)
+ public TodoItem AddTask(TodoItem newTask)
         {
-            newTask.TaskId = nextTaskId++;  // ID from the counter
-            todoItems.Add(newTask);          // Add new task to the list
-            return newTask;                  // Return the added task
+            // Assign a new ID
+            newTask.TaskId = nextTaskId++;
+
+            // NOTE: We assume CreatedAt is set by the client and is mandatory.
+
+            todoItems.Add(newTask);
+            return newTask;
         }
 
         // Deletes a task

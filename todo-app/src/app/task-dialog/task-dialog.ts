@@ -55,7 +55,7 @@ export class TaskDialog {
     const dateTime = new Date(this.selectedDate);
     dateTime.setHours(hours);
     dateTime.setMinutes(minutes);
- console.log('Combined dateTime:', dateTime.toISOString());  // <-- Add this line
+
     this.dialogRef.close({
       title: this.taskTitle,
       dateTime: dateTime.toISOString(),

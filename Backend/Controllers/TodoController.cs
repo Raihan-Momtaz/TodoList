@@ -33,12 +33,16 @@ namespace TodoApi.Controllers
 
         // Adds a task
         [HttpPost]
+        [HttpPost]
         public ActionResult<TodoItem> Add(TodoItem todoItem)
         {
-            var createdItem = todoService.AddTask(todoItem);   
-            
+            // Log for debugging
+            Console.WriteLine($"Received task: Title={todoItem.TaskTitle}, CreatedAt={todoItem.CreatedAt}");
+
+            var createdItem = todoService.AddTask(todoItem);
             return CreatedAtAction(nameof(Get), new { id = createdItem.TaskId }, createdItem);
         }
+
 
         // Deletes a task
         [HttpDelete("{id}")]
