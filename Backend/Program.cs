@@ -3,28 +3,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-// ✅ Register CORS
+//Registering CORS to integrate to the frontend server hosted on port 4200
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Angular dev server
+        policy.WithOrigins("http://localhost:4200") 
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
-// Register your TodoService
+// Registering TodoService
 builder.Services.AddSingleton<TodoApi.Services.TodoService>();
 
 var app = builder.Build();
 
-// ✅ Apply CORS before MapControllers()
 app.UseCors("AllowFrontend");
-
-// Optional: If you use HTTPS redirection or authorization, include these:
-// app.UseHttpsRedirection();
-// app.UseAuthorization();
 
 app.MapControllers();
 
