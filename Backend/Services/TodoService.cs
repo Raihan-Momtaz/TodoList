@@ -23,9 +23,6 @@ namespace TodoApi.Services
         {
             // Assign a new ID
             newTask.TaskId = nextTaskId++;
-
-            // NOTE: We assume CreatedAt is set by the client and is mandatory.
-
             todoItems.Add(newTask);
             return newTask;
         }

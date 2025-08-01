@@ -31,7 +31,7 @@ export class TodoList {
   //function to list all items in a list
 loadTodos() {
   this.todoService.getTodos().subscribe(data => {
-    // Sort ascending: oldest first
+    // Sort ascending
     data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
     console.log('Todos loaded and sorted (ascending):', data);
