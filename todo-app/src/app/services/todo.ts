@@ -6,6 +6,7 @@ export interface TodoItem {
   taskId: number;
   taskTitle: string;
   isTaskCompleted: boolean;
+  createdAt: string;
 }
 
 @Injectable({
@@ -24,13 +25,16 @@ export class TodoService {
   }
 
   //function to add an item in TODO list
-  addTodo(title: string): Observable<TodoItem> {
+  addTodo(todo: { taskTitle: string; createdAt: string; isTaskCompleted?: boolean }): Observable<TodoItem> {
+    // Set default isTaskCompleted to false if not provided
     const newTodo = {
-      taskTitle: title,
-      isTaskCompleted: false // or whatever default you want
+      taskTitle: todo.taskTitle,
+      createdAt: todo.createdAt,
+      isTaskCompleted: todo.isTaskCompleted ?? false
     };
     return this.http.post<TodoItem>(this.apiUrl, newTodo);
   }
+
 
   //function to delete an item in TODO list
   deleteTodo(id: number): Observable<void> {

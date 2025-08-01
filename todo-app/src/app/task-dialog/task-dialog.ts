@@ -4,33 +4,37 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {ChangeDetectionStrategy} from '@angular/core';
 
+import {provideNativeDateAdapter} from '@angular/material/core';
 @Component({
   selector: 'app-task-dialog',
   standalone: true,
-   styleUrls: ['./task-dialog.scss'], 
-  imports: [CommonModule, MatDialogModule, MatButtonModule, FormsModule],
-  template: `
-
-  <div class="dialog-container">
-    <h3 mat-dialog-title>Add a new task</h3>
-
-    <mat-dialog-content class="dialog-content">
-      <input [(ngModel)]="taskTitle" placeholder="Enter task details here..." class="task-input" (keydown.enter)="onSave()"  />
-    </mat-dialog-content>
-
-    <mat-dialog-actions class="dialog-actions">
-      <button mat-button color="primary" (click)="onSave()">Add Task</button>
-      <button mat-button (click)="onCancel()">Cancel</button>
-    </mat-dialog-actions>
-
-  </div>
-
-  `,
-
+  providers: [provideNativeDateAdapter()],
+  
+  styleUrls: ['./task-dialog.scss'],
+  templateUrl: './task-dialog.html', // <-- use this instead of `template:`
+  
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskDialog {
   taskTitle: string = '';
+  selectedDate: Date | null = null;
+  selectedTime: string = ''; // HH:mm
 
   constructor(
     public dialogRef: MatDialogRef<TaskDialog>,
@@ -44,7 +48,17 @@ export class TaskDialog {
 
   //function to handle save button to save task data
   onSave(): void {
-    if (!this.taskTitle.trim()) return; 
-    this.dialogRef.close(this.taskTitle); 
+    if (!this.taskTitle.trim() || !this.selectedDate || !this.selectedTime) return;
+
+    // Combine date and time into a single ISO string
+    const [hours, minutes] = this.selectedTime.split(':').map(Number);
+    const dateTime = new Date(this.selectedDate);
+    dateTime.setHours(hours);
+    dateTime.setMinutes(minutes);
+ console.log('Combined dateTime:', dateTime.toISOString());  // <-- Add this line
+    this.dialogRef.close({
+      title: this.taskTitle,
+      dateTime: dateTime.toISOString(),
+    });
   }
 }

@@ -37,20 +37,23 @@ export class TodoList {
     this.todoService.deleteTodo(id).subscribe(() => this.loadTodos());
   }
 
-  //function to add an item in a list via dialogbox
-  onAdd() {
-      const dialogRef = this.dialog.open(TaskDialog, {
-        width: '90%',
-        data: {} 
-      });
+onAdd() {
+  const dialogRef = this.dialog.open(TaskDialog, { data: {} });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (!result || !result.trim()) return;
-        this.todoService.addTodo(result).subscribe(() => {
-          this.loadTodos(); 
-        });
-      });
-    }
+  dialogRef.afterClosed().subscribe(result => {
+    if (!result || !result.title || !result.title.trim()) return;
+
+    const newTodo = {
+      taskTitle: result.title.trim(),
+      createdAt: result.dateTime,
+      isTaskCompleted: false
+    };
+    console.log('Adding new todo:', newTodo);
+    this.todoService.addTodo(newTodo).subscribe(() => {
+      this.loadTodos();
+    });
+  });
+}
 
 
 
