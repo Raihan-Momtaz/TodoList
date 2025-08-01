@@ -57,6 +57,7 @@ now try npm install )
 
 Install  **Angular Material**  
   ng add @angular/material  
+  -for theme choose magenta/purple
 
 Install  **Moment** for Date&Timepicker  
   npm install @angular/material-moment-adapter moment  
