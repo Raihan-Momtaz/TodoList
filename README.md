@@ -51,6 +51,10 @@ This starts the backend API on https://localhost:5001
 cd todo-app  
 npm install  
 
+( Note, **If your system has script execution disabled**, open PowerShell as Administrator and enter:  
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned  
+now try npm install )  
+
 Install  **Angular Material**  
   ng add @angular/material  
 
