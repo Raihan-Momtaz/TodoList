@@ -28,11 +28,10 @@ export class TodoList {
     this.loadTodos();
   }
 
-  //function to list all items in a list
 loadTodos() {
   this.todoService.getTodos().subscribe(data => {
-    // Sort ascending
-    data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    // Sort descending
+    data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     this.todos = data;
   });
 }
