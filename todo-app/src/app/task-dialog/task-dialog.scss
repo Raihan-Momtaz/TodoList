@@ -16,14 +16,17 @@
   width: 60%;
   padding: 8px;
   margin-top: 10px;
-
-  border: none;               /* Remove all borders */
-  border-bottom: 2px solid #7339a2; /* Add bottom border */
-  outline: none;              /* Remove default focus outline */
+  border: none;               
+  border-bottom: 2px solid #7339a2; 
+  outline: none;              
 
 }
 
 .dialog-actions {
   display: flex;
   justify-content: center;
+}
+
+h3{
+  margin-top: 5%;
 }

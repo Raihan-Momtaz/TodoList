@@ -8,20 +8,22 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-task-dialog',
   standalone: true,
-   styleUrls: ['./task-dialog.scss'], // ✅ Add this
+   styleUrls: ['./task-dialog.scss'], 
   imports: [CommonModule, MatDialogModule, MatButtonModule, FormsModule],
   template: `
+
   <div class="dialog-container">
-    <h2 mat-dialog-title>Add Task</h2>
+    <h3 mat-dialog-title>Add a new task</h3>
 
     <mat-dialog-content class="dialog-content">
-      <input [(ngModel)]="taskTitle" placeholder="Enter task details here..." class="task-input" />
+      <input [(ngModel)]="taskTitle" placeholder="Enter task details here..." class="task-input" (keydown.enter)="onSave()"  />
     </mat-dialog-content>
 
     <mat-dialog-actions class="dialog-actions">
+      <button mat-button color="primary" (click)="onSave()">Add Task</button>
       <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-button color="primary" (click)="onSave()">Save</button>
     </mat-dialog-actions>
+
   </div>
 
   `,
@@ -35,12 +37,14 @@ export class TaskDialog {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
+  //function to handle cancel button to close without saving any data
   onCancel(): void {
-    this.dialogRef.close(); // Close without saving
+    this.dialogRef.close(); 
   }
 
+  //function to handle save button to save task data
   onSave(): void {
-    if (!this.taskTitle.trim()) return; // Avoid empty task
-    this.dialogRef.close(this.taskTitle); // Return the task title
+    if (!this.taskTitle.trim()) return; 
+    this.dialogRef.close(this.taskTitle); 
   }
 }

@@ -1,60 +1,56 @@
 import { Component } from '@angular/core';
 import { TodoService, TodoItem } from '../../services/todo';
-import { CommonModule } from '@angular/common';  // For *ngFor
-import { FormsModule } from '@angular/forms';    // For ngModel
-import { MatTableModule } from '@angular/material/table'; // ✅ Import Angular Material table
-import { MatIconModule } from '@angular/material/icon';       // ✅ Import this
+import { CommonModule } from '@angular/common';  
+import { FormsModule } from '@angular/forms';    
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';       
 import { MatButtonModule } from '@angular/material/button';  
 import { TaskDialog } from '../../task-dialog/task-dialog';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // ✅ Import this
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-   imports: [CommonModule, FormsModule, MatTableModule, MatIconModule, MatButtonModule, MatDialogModule,  TaskDialog ],  // ✅ Add MatTableModule
+   imports: [CommonModule, FormsModule, MatTableModule, MatIconModule, MatButtonModule, MatDialogModule], 
   templateUrl: './todo-list.html',
   styleUrls: ['./todo-list.scss'],
 })
+
 export class TodoList {
   todos: TodoItem[] = [];
   newTitle = '';
-   displayedColumns: string[] = ['taskTitle', 'action'];  // ✅ Needed for table
+   displayedColumns: string[] = ['taskTitle', 'action']; 
 
   constructor(private todoService: TodoService,
-    private dialog: MatDialog // ✅ Inject MatDialog
+    private dialog: MatDialog 
   ) {
     this.loadTodos();
   }
 
+  //function to list all items in a list
   loadTodos() {
     this.todoService.getTodos().subscribe(data => (this.todos = data));
   }
 
-  addTodo() {
-    if (!this.newTitle.trim()) return;
-    this.todoService.addTodo(this.newTitle).subscribe(() => {
-      this.newTitle = '';
-      this.loadTodos();
-    });
-  }
-
+   //function to delete an item in a list
   deleteTodo(id: number) {
     this.todoService.deleteTodo(id).subscribe(() => this.loadTodos());
   }
 
-
-onAdd() {
-    const dialogRef = this.dialog.open(TaskDialog, {
-      width: '90%',
-      data: {} // You can pass default data if needed
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result || !result.trim()) return;
-      this.todoService.addTodo(result).subscribe(() => {
-        this.loadTodos(); // Same behavior as original addTodo()
+  //function to add an item in a list via dialogbox
+  onAdd() {
+      const dialogRef = this.dialog.open(TaskDialog, {
+        width: '90%',
+        data: {} 
       });
-    });
-  }
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (!result || !result.trim()) return;
+        this.todoService.addTodo(result).subscribe(() => {
+          this.loadTodos(); 
+        });
+      });
+    }
 
 
 

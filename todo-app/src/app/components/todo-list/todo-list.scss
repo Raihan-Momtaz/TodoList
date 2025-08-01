@@ -3,7 +3,6 @@
     margin: 0 auto;
     padding: 15px;
     box-sizing: border-box;
-
 }
 
 .centered-table table{
@@ -24,4 +23,32 @@
 
 .mat-mdc-cell{
     border-bottom: none !important;
+}
+
+.heading{
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(245, 222, 179, 0.97);
+}
+
+.heading-text{
+    margin-top: 10%; 
+    margin-bottom: 5%;
+}
+
+.add-new-task-button{
+    align-self: flex-start; 
+    margin-bottom: 10px;
+}
+
+.mat-elevation-z8{
+    margin-top: 20px;
+}
+
+.no-tasks-message{
+    text-align:center; 
+    margin-top: 20px; 
+    color: rgb(238, 234, 234)
 }
