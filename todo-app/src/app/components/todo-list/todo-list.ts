@@ -33,8 +33,6 @@ loadTodos() {
   this.todoService.getTodos().subscribe(data => {
     // Sort ascending
     data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-
-    console.log('Todos loaded and sorted (ascending):', data);
     this.todos = data;
   });
 }
