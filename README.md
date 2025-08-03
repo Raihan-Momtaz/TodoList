@@ -2,7 +2,7 @@
 
 The Todo List application built with latest **Angular 20** and **ASP.NET Core 9**. 
 
-Users can add, view, and delete tasks in a clean, responsive interface using Angular Materials.
+Users can add, view, delete, update status of tasks in a clean, responsive interface using Angular Materials.
 
 **Tech Stack**
 - **Frontend:** Angular 20, Angular Material, SCSS
