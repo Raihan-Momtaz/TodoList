@@ -1,28 +1,27 @@
 <div class="dialog-container">
-  
-    <h3 mat-dialog-title>Add a new task</h3>
+  <h3 mat-dialog-title>Add a new task</h3>
 
-<mat-dialog-content class="dialog-content" required>
-<div>
+  <mat-dialog-content class="dialog-content" required>
+  <div>
 
-<input [(ngModel)]="taskTitle" placeholder="Enter task details here..." class="task-input" (keydown.enter)="onSave()" />
+    <input [(ngModel)]="taskTitle" placeholder="Enter task details here..." class="task-input" (keydown.enter)="onSave()" />
      
-<div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;">
-    <mat-form-field>
-      <mat-label>Due Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" required>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;">
+        <mat-form-field>
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" required>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Due Time</mat-label>
-      <input matInput type="time" [(ngModel)]="selectedTime" required/>
-      <mat-hint>HH:MM AM/PM</mat-hint>
-    </mat-form-field>
-    </div>
-    </div>
-  </mat-dialog-content>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Due Time</mat-label>
+          <input matInput type="time" [(ngModel)]="selectedTime" required/>
+          <mat-hint>HH:MM AM/PM</mat-hint>
+        </mat-form-field>
+        </div>
+        </div>
+      </mat-dialog-content>
 
 <div class="prop">
     <mat-form-field appearance="fill" class="full-width">
@@ -50,7 +49,9 @@
       </mat-select>
     </mat-form-field>
 
-
+    <div *ngIf="warningMessage" class="warning-message">
+      {{ warningMessage }}
+    </div>
 
     <mat-dialog-actions class="dialog-actions">
       <button mat-button color="primary" (click)="onSave()">Add Task</button>

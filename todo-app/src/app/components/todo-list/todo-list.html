@@ -2,105 +2,91 @@
   <h1 class="heading-text">TODO List Application</h1>
 </div>
 <div class="container">
-
   <div  class="add-new-task-button">
     <button mat-raised-button (click)="onAdd()">
       <mat-icon>add</mat-icon>Add new Task
     </button>
   </div>
-<!-- Personal Tasks Table -->
-<div class="centered-table" style="margin-top: 2rem; margin-bottom: 2rem;">
-  <h2 class="sub-heading-text">Personal Tasks</h2>
-  <table mat-table [dataSource]="personalTodos" class="mat-elevation-z8">
-    
-    <ng-container matColumnDef="taskTitle">
-      <th mat-header-cell *matHeaderCellDef>Task</th>
-      <td mat-cell *matCellDef="let todo">{{ todo.taskTitle }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef>Due On</th>
-      <td mat-cell *matCellDef="let todo">{{ todo.createdAt | date:'short' }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="priority">
-      <th mat-header-cell *matHeaderCellDef>Priority</th>
-            <td mat-cell *matCellDef="let todo">
-              <span [ngClass]="getPriorityClass(todo.priority)">
-                {{ todo.priority }}
-              </span>
-            </td>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let todo">{{ todo.status }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let todo">
-        <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
-  </table>
-  <div *ngIf="personalTodos.length === 0" class="no-tasks-message">
-    <p><strong>Your task list is empty, </strong><em> add one to get started!</em></p>
+  <!-- Personal Tasks Type Table -->
+  <div class="centered-table" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <h2 class="sub-heading-text">Personal Tasks</h2>
+    <table mat-table [dataSource]="personalTodos" class="mat-elevation-z8">     
+      <ng-container matColumnDef="taskTitle">
+        <th mat-header-cell *matHeaderCellDef>Task</th>
+        <td mat-cell *matCellDef="let todo">{{ todo.taskTitle }}</td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Due On</th>
+        <td mat-cell *matCellDef="let todo">{{ todo.createdAt | date:'short' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef>Priority</th>
+              <td mat-cell *matCellDef="let todo">
+                <span [ngClass]="getPriorityClass(todo.priority)">
+                  {{ todo.priority }}
+                </span>
+              </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let todo">{{ todo.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let todo">
+          <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
+    </table>
+    <div *ngIf="personalTodos.length === 0" class="no-tasks-message">
+      <p><strong>Your task list is empty, </strong><em> add one to get started!</em></p>
+    </div>
   </div>
-</div>
 
-<!-- Work Tasks Table -->
-<div class="centered-table" style="margin-top: 2rem; margin-bottom: 2rem;">
-  <h2 class="sub-heading-text">Work Tasks</h2>
-  <table mat-table [dataSource]="workTodos" class="mat-elevation-z8">
-    
-    <ng-container matColumnDef="taskTitle">
-      <th mat-header-cell *matHeaderCellDef>Task</th>
-      <td mat-cell *matCellDef="let todo">{{ todo.taskTitle }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef>Due On</th>
-      <td mat-cell *matCellDef="let todo">{{ todo.createdAt | date:'short' }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="priority">
-      <th mat-header-cell *matHeaderCellDef>Priority</th>
-            <td mat-cell *matCellDef="let todo">
-              <span [ngClass]="getPriorityClass(todo.priority)">
-                {{ todo.priority }}
-              </span>
-            </td>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let todo">{{ todo.status }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let todo">
-        <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
-  </table>
+  <!-- Work Task Type Table -->
+  <div class="centered-table" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <h2 class="sub-heading-text">Work Tasks</h2>
+    <table mat-table [dataSource]="workTodos" class="mat-elevation-z8">    
+      <ng-container matColumnDef="taskTitle">
+        <th mat-header-cell *matHeaderCellDef>Task</th>
+        <td mat-cell *matCellDef="let todo">{{ todo.taskTitle }}</td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Due On</th>
+        <td mat-cell *matCellDef="let todo">{{ todo.createdAt | date:'short' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef>Priority</th>
+              <td mat-cell *matCellDef="let todo">
+                <span [ngClass]="getPriorityClass(todo.priority)">
+                  {{ todo.priority }}
+                </span>
+              </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let todo">{{ todo.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let todo">
+          <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['taskTitle', 'createdAt', 'priority', 'status', 'action']"></tr>
+    </table>
     <div *ngIf="workTodos.length === 0" class="no-tasks-message">
-    <p><strong>Your work queue is empty, </strong><em>add a task to begin.</em></p>
+      <p><strong>Your work queue is empty, </strong><em>add a task to begin.</em></p>
+    </div>
   </div>
-</div>
-
-
 
 <h2 class="sub-heading-text">Task Status</h2>
+<!-- Task Status Section -->
 <div class="drag-container">
- 
+ <!-- Backlog Container -->
   <div class="example-container">
     <h2>Backlog</h2>
     <div
@@ -114,12 +100,11 @@
       <div *ngFor="let todo of backlogTodos" cdkDrag class="example-box"
       [ngClass]="getTaskPriorityClass(todo.priority)"
       >
-        
         {{ todo.taskTitle }}
       </div>
     </div>
   </div>
-
+  <!-- Inprogress Container -->
   <div class="example-container">
     <h2>In Progress</h2>
     <div
@@ -137,7 +122,7 @@
       </div>
     </div>
   </div>
-
+  <!-- Completed Container -->
   <div class="example-container">
     <h2>Completed</h2>
     <div
@@ -156,82 +141,51 @@
     </div>
   </div>
 </div>
+<!-- Overdue Table -->
+<div class="centered-table" style="margin-top: 2rem;">
+  <h2 class="sub-heading-text">Overdue Tasks</h2>
+  <table mat-table [dataSource]="overdueTodos" class="mat-elevation-z8">
+    <!-- Task Column -->
+    <ng-container matColumnDef="taskTitle">
+      <th mat-header-cell *matHeaderCellDef> Task </th>
+      <td mat-cell *matCellDef="let todo"> {{ todo.taskTitle }} </td>
+    </ng-container>
+    <!-- Due Date Column -->
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef> Due On </th>
+      <td mat-cell *matCellDef="let todo">  {{ todo.createdAt | date:'short' }} </td>
+    </ng-container>
+    <!-- Priority Column -->
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef> Priority </th>
+        <td mat-cell *matCellDef="let todo">
+          <span [ngClass]="getPriorityClass(todo.priority)">
+            {{ todo.priority }}
+          </span>
+        </td>
+    </ng-container>
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let todo"> {{ todo.status }} </td>
+    </ng-container>
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let todo"> {{ todo.type }} </td>
+    </ng-container>
+    <!-- Deletion Column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef > </th>
+        <td mat-cell *matCellDef="let todo">
+          <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['taskTitle', 'dueDate', 'priority', 'status', 'type', 'action']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['taskTitle', 'dueDate', 'priority', 'status', 'type', 'action']"></tr>
+  </table>
 
-
-
-
-
-
-      <div class="centered-table" style="margin-top: 2rem;">
-      <h2 class="sub-heading-text">Overdue Tasks</h2>
-      <table mat-table [dataSource]="overdueTodos" class="mat-elevation-z8">
-
-        <!-- Task Column -->
-        <ng-container matColumnDef="taskTitle">
-          <th mat-header-cell *matHeaderCellDef> Task </th>
-          <td mat-cell *matCellDef="let todo"> {{ todo.taskTitle }} </td>
-        </ng-container>
-
-        <!-- Due Date Column -->
-        <ng-container matColumnDef="dueDate">
-          <th mat-header-cell *matHeaderCellDef> Due Date </th>
-          <td mat-cell *matCellDef="let todo">  {{ todo.createdAt | date:'short' }} </td>
-        </ng-container>
-
-        <!-- Priority Column -->
-        <ng-container matColumnDef="priority">
-          <th mat-header-cell *matHeaderCellDef> Priority </th>
-            <td mat-cell *matCellDef="let todo">
-              <span [ngClass]="getPriorityClass(todo.priority)">
-                {{ todo.priority }}
-              </span>
-            </td>
-
-        </ng-container>
-
-        <!-- Status Column -->
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let todo"> {{ todo.status }} </td>
-        </ng-container>
-        <!-- Type Column -->
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> Type </th>
-        <td mat-cell *matCellDef="let todo"> {{ todo.type }} </td>
-      </ng-container>
-
-            <!-- Deletion Column -->
-      <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef > </th>
-          <td mat-cell *matCellDef="let todo">
-            <button mat-button color="warn" (click)="deleteTodo(todo.taskId)">Delete</button>
-          </td>
-      </ng-container>
-  <tr mat-header-row *matHeaderRowDef="['taskTitle', 'dueDate', 'priority', 'status', 'type', 'action']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['taskTitle', 'dueDate', 'priority', 'status', 'type', 'action']"></tr>
-
-      </table>
-
-      <div *ngIf="overdueTodos.length === 0" class="no-tasks-message">
-        <strong> </strong>
-        <p><strong>No overdue tasks, </strong><em>You're on top of everything.</em></p>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
+  <div *ngIf="overdueTodos.length === 0" class="no-tasks-message">
+    <p><strong>No overdue tasks, </strong><em>You're on top of everything.</em></p>
+  </div>
+</div>

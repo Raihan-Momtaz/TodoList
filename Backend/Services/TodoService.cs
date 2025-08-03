@@ -1,8 +1,7 @@
-using TodoApi.Models;  // Imported the TodoItem model 
+using TodoApi.Models; 
 
 namespace TodoApi.Services
 {
-    // Class for managing the TODO items in-memory
     public class TodoService
     {
         // Private list for storing all the todo items
@@ -30,36 +29,30 @@ namespace TodoApi.Services
         // Deletes a task
         public bool DeleteTask(int taskId)
         {
-            var taskToDelete = GetTaskById(taskId);  // Get task
-            if (taskToDelete is null)                 // If not found, return false
+            var taskToDelete = GetTaskById(taskId);   
+            if (taskToDelete is null)                 
                 return false;
 
-            todoItems.Remove(taskToDelete);           // Removes the task 
-            return true;                              // Return boolean for success
+            todoItems.Remove(taskToDelete);         
+            return true;                              
         }
-        
-public void UpdateTask(TodoItem updatedTodo)
-{
-    var existingTask = GetTaskById(updatedTodo.TaskId);
-            if (existingTask != null)
-            {
-
-
-
-                existingTask.Status = updatedTodo.Status;
-                // update other properties if any
-                if (existingTask.Status == "Completed")
+        //method for updating task status   
+        public void UpdateTask(TodoItem updatedTodo)
+        {
+            var existingTask = GetTaskById(updatedTodo.TaskId);
+                if (existingTask != null)
                 {
-
-                    existingTask.IsTaskCompleted = true;
-                }
-                else
-                {
-                    existingTask.IsTaskCompleted = false;
-                }
-    }
-}
-
+                    existingTask.Status = updatedTodo.Status;
+                    if (existingTask.Status == "Completed")
+                    {
+                        existingTask.IsTaskCompleted = true;
+                    }
+                    else
+                    {
+                        existingTask.IsTaskCompleted = false;
+                    }
+            }
+        }
 
     }
 }

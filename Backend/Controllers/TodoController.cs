@@ -8,12 +8,10 @@ namespace TodoApi.Controllers
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {
-        private readonly TodoService todoService;  // using the services layer to manege tasks
-
-
+        private readonly TodoService todoService; 
         public TodoController(TodoService todoService)
         {
-            this.todoService = todoService;       // Assigns service to the private field
+            this.todoService = todoService;     
         }
 
         // Gets all task
@@ -41,16 +39,11 @@ namespace TodoApi.Controllers
 
         // Adds a task
         [HttpPost]
-        [HttpPost]
         public ActionResult<TodoItem> Add(TodoItem todoItem)
         {
-            // Log for debugging
-            Console.WriteLine($"Received task: Title={todoItem.TaskTitle}, CreatedAt={todoItem.CreatedAt}");
-
             var createdItem = todoService.AddTask(todoItem);
             return CreatedAtAction(nameof(Get), new { id = createdItem.TaskId }, createdItem);
         }
-
 
         // Deletes a task
         [HttpDelete("{id}")]
@@ -60,29 +53,24 @@ namespace TodoApi.Controllers
             return isDeleted ? NoContent() : NotFound();
         }
         
-// PUT: api/todo/5
-[HttpPut("{id}")]
-public IActionResult UpdateTodoItem(int id, [FromBody] TodoItem updatedTodo)
-{
-    Console.WriteLine($"➡️ [Controller] Received full update for Task ID: {id}");
+        // Update Task Status
+        [HttpPut("{id}")]
+        public IActionResult UpdateTodoItem(int id, [FromBody] TodoItem updatedTodo)
+        {
+            if (id != updatedTodo.TaskId)
+                {
+                    return BadRequest("Task ID mismatch");
+                }
 
-    if (id != updatedTodo.TaskId)
-    {
-        return BadRequest("Task ID mismatch");
-    }
+            var existingTask = todoService.GetTaskById(id);
+            if (existingTask == null)
+                {
+                    return NotFound();
+                }
 
-    var existingTask = todoService.GetTaskById(id);
-    if (existingTask == null)
-    {
-        Console.WriteLine($"❌ [Controller] Task ID: {id} not found.");
-        return NotFound();
-    }
-
-    todoService.UpdateTask(updatedTodo);
-    Console.WriteLine($"✅ [Controller] Updated Task ID: {id}");
-    return Ok(updatedTodo);
-}
-
+            todoService.UpdateTask(updatedTodo);
+            return Ok(updatedTodo);
+        }
         
     }
 }

@@ -11,7 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {ChangeDetectionStrategy} from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { TaskStatus } from '../models/task-status.enum'; // Update path as needed
+import { TaskStatus } from '../models/task-status.enum'; 
 
 import {provideNativeDateAdapter} from '@angular/material/core';
 @Component({
@@ -20,7 +20,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
   providers: [provideNativeDateAdapter()],
   
   styleUrls: ['./task-dialog.scss'],
-  templateUrl: './task-dialog.html', // <-- use this instead of `template:`
+  templateUrl: './task-dialog.html', 
   
   imports: [
     CommonModule,
@@ -31,18 +31,19 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule,       // ✅ add this
-    MatOptionModule        // ✅ and this
+    MatSelectModule,       
+    MatOptionModule        
   ],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskDialog {
   taskTitle: string = '';
   selectedDate: Date | null = null;
-  selectedTime: string = ''; // HH:mm
-  priority: string = 'Medium'; // default
+  selectedTime: string = ''; 
+  priority: string = 'Medium'; 
   type: string = 'Personal';
   status: string = 'Backlog';
+  warningMessage: string = '';
 
 
   constructor(
@@ -57,9 +58,13 @@ export class TaskDialog {
 
   //function to handle save button to save task data
   onSave(): void {
-    if (!this.taskTitle.trim() || !this.selectedDate || !this.selectedTime) return;
+    if (!this.taskTitle.trim() || !this.selectedDate || !this.selectedTime || !this.priority || !this.type || !this.status) {
+      this.warningMessage = 'Please fill all fields to continue.';
+      return;
+    }
 
-    // Combine date and time into a single ISO string
+    this.warningMessage = ''; 
+
     const [hours, minutes] = this.selectedTime.split(':').map(Number);
     const dateTime = new Date(this.selectedDate);
     dateTime.setHours(hours);
@@ -67,10 +72,11 @@ export class TaskDialog {
 
     this.dialogRef.close({
       title: this.taskTitle,
-      dateTime: dateTime.toISOString(),// <-- Add this line for dueDate
+      dateTime: dateTime.toISOString(),
       priority: this.priority,
       type: this.type, 
-      status:this.status,
+      status: this.status,
     });
   }
+
 }

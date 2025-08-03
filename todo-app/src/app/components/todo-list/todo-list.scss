@@ -7,8 +7,7 @@
 
 .centered-table table{
     border-radius: 10px;
-    overflow: hidden;
-    
+    overflow: hidden;  
 }
 
 .centered-table th{
@@ -133,15 +132,12 @@ th, td {
   width: 16.66%;          /* still equal width */
   white-space: normal;    /* allow text to wrap */
   overflow: visible;      /* let text flow normally */
-  text-overflow: unset;   /* cancel truncation */
-  
-  
+  text-overflow: unset;   /* cancel truncation */ 
 }
 
 td{
  font-size: 14px; 
 }
-
 
 .priority-badge {
   padding: 4px 10px;
@@ -181,9 +177,9 @@ td{
   color: white;
 }
 
-
 .sub-heading-text{
   color: rgb(234, 216, 175);
-    text-align: center;
+    text-align: left;
     padding: 0.5rem;
 }
+

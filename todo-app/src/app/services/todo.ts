@@ -10,10 +10,8 @@ export interface TodoItem {
   createdAt: string;
   priority: string;
   type:string;
-  status: TaskStatus; //status: string;  // Add this
-  dueDate: string;  // <-- add this
-
-  
+  status: TaskStatus;
+  dueDate: string;  
 } 
 
 @Injectable({
@@ -46,17 +44,13 @@ export class TodoService {
     return this.http.post<TodoItem>(this.apiUrl, newTodo);
   }
 
-
   //function to delete an item in TODO list
   deleteTodo(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-
+  //function to update an item task status in TODO list
   updateTodo(todo: TodoItem): Observable<TodoItem> {
-    // Adjust URL based on your API
     return this.http.put<TodoItem>(`${this.apiUrl}/${todo.taskId}`, todo);
 
   }
-
-
 }
