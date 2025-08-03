@@ -9,6 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {ChangeDetectionStrategy} from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { TaskStatus } from '../models/task-status.enum'; // Update path as needed
 
 import {provideNativeDateAdapter} from '@angular/material/core';
 @Component({
@@ -27,7 +30,9 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule,       // ✅ add this
+    MatOptionModule        // ✅ and this
   ],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -35,6 +40,10 @@ export class TaskDialog {
   taskTitle: string = '';
   selectedDate: Date | null = null;
   selectedTime: string = ''; // HH:mm
+  priority: string = 'Medium'; // default
+  type: string = 'Personal';
+  status: string = 'Backlog';
+
 
   constructor(
     public dialogRef: MatDialogRef<TaskDialog>,
@@ -58,7 +67,10 @@ export class TaskDialog {
 
     this.dialogRef.close({
       title: this.taskTitle,
-      dateTime: dateTime.toISOString(),
+      dateTime: dateTime.toISOString(),// <-- Add this line for dueDate
+      priority: this.priority,
+      type: this.type, 
+      status:this.status,
     });
   }
 }

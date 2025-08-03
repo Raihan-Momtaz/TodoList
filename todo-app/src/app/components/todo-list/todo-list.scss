@@ -8,6 +8,7 @@
 .centered-table table{
     border-radius: 10px;
     overflow: hidden;
+    
 }
 
 .centered-table th{
@@ -34,8 +35,8 @@
 }
 
 .heading-text{
-    margin-top: 10%; 
-    margin-bottom: 5%;
+    margin-top: 3%; 
+    margin-bottom: 2%;
 }
 
 .add-new-task-button{
@@ -51,4 +52,138 @@
     text-align:center; 
     margin-top: 20px; 
     color: rgb(238, 234, 234)
+}
+
+.drag-container {
+  
+  display: flex;            /* arrange children horizontally */
+  gap: 20px;                /* spacing between the columns */
+  flex-wrap: nowrap;        /* prevent wrapping to next line */
+  justify-content: flex-start;  /* align left, you can center or space-between if you like */
+}
+
+.drag-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px;
+}
+
+.example-container {
+  flex: 1;
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.example-container h2 {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.example-list {
+  min-height: 300px;
+  border: 2px dashed #999;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: white;
+}
+
+.example-box {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  cursor: move;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+table mat-elevation-z8{
+  table-layout: fixed; /* forces equal column width */
+  width: 100%;         /* ensures table fills container */
+}
+
+th, td {
+  width: 16.66%;          /* still equal width */
+  white-space: normal;    /* allow text to wrap */
+  overflow: visible;      /* let text flow normally */
+  text-overflow: unset;   /* cancel truncation */
+  
+  
+}
+
+td{
+ font-size: 14px; 
+}
+
+
+.priority-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  text-align: center;
+}
+
+.priority-badge.high {
+  background-color: #ec211e; /* Red */
+}
+
+.priority-badge.medium {
+  background-color: #f5b30b; /* Orange */
+}
+
+.priority-badge.low {
+  background-color: #2c9932; /* Green */
+}
+
+
+.example-box.high-priority {
+  background-color: #ec211e; /* red */
+  color: white;
+}
+
+.example-box.medium-priority {
+  background-color: #f5b30b; /* orange */
+  color: white;
+}
+
+.example-box.low-priority {
+  background-color: #2c9932; /* green */
+  color: white;
+}
+
+
+.sub-heading-text{
+  color: rgb(234, 216, 175);
+    text-align: center;
+    padding: 0.5rem;
 }

@@ -19,7 +19,7 @@ namespace TodoApi.Services
             todoItems.FirstOrDefault(task => task.TaskId == taskId);
 
         // Adds new task
- public TodoItem AddTask(TodoItem newTask)
+        public TodoItem AddTask(TodoItem newTask)
         {
             // Assign a new ID
             newTask.TaskId = nextTaskId++;
@@ -37,5 +37,29 @@ namespace TodoApi.Services
             todoItems.Remove(taskToDelete);           // Removes the task 
             return true;                              // Return boolean for success
         }
+        
+public void UpdateTask(TodoItem updatedTodo)
+{
+    var existingTask = GetTaskById(updatedTodo.TaskId);
+            if (existingTask != null)
+            {
+
+
+
+                existingTask.Status = updatedTodo.Status;
+                // update other properties if any
+                if (existingTask.Status == "Completed")
+                {
+
+                    existingTask.IsTaskCompleted = true;
+                }
+                else
+                {
+                    existingTask.IsTaskCompleted = false;
+                }
+    }
+}
+
+
     }
 }
