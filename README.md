@@ -62,8 +62,8 @@ Install  **Angular Material**
 Install  **Moment** for Date&Timepicker  
   npm install @angular/material-moment-adapter moment  
 
-Install **Angular Component Dev Kit (CDK)** for drag and drop functionality
-npm install @angular/cdk
+Install **Angular Component Dev Kit (CDK)** for drag and drop functionality  
+npm install @angular/cdk  
 
 **Start the Angular App**  
   ng serve  
